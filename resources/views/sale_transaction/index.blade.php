@@ -4,7 +4,7 @@
 
 @section("maincontent")
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Sale Transaction Form</h3>
@@ -19,37 +19,53 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <label for="">Transaction Date</label>
-            <input type="date" class="form-control" id="transaction_date">
+          <div class="row">
+            <div class="col-sm-10">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Transaction Date</label>
+                    <input type="date" class="form-control" id="transaction_date">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Item</label>
+                    <select id="item_id" class="form-control select2"></select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Qty</label>
+                    <input type="number" class="form-control" id="qty">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Amount</label>
+                    <input type="number" class="form-control" id="amount">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="">Discount/Commission</label>
+                    <input type="number" class="form-control" id="discount_or_commission">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Net</label>
+                    <input type="number" class="form-control" id="net">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="">&nbsp;</label>
+                <br>
+                <button class="btn btn-success btn-block" id="btnsave"><i class="fas fa-save"></i> Save</button>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="">Item</label>
-            <select id="item_id" class="form-control select2"></select>
-          </div>
-          <div class="form-group">
-            <label for="">Qty</label>
-            <input type="number" class="form-control" id="qty">
-          </div>
-          <div class="form-group">
-            <label for="">Amount</label>
-            <input type="number" class="form-control" id="amount">
-          </div>
-          <div class="form-group">
-            <label for="">Discount/Commission</label>
-            <input type="number" class="form-control" id="discount_or_commission">
-          </div>
-          <div class="form-group">
-            <label for="">Net</label>
-            <input type="number" class="form-control" id="net">
-          </div>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-success" id="btnsave"><i class="fas fa-save"></i> Save</button>
         </div>
       </div>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">List</h3>
@@ -63,7 +79,7 @@
             </button>
           </div>
         </div>
-        <div class="card-body" id="listarea">
+        <div class="card-body" id="listarea" style="overflow-x: auto;overflow-y: auto; max-height:500px;">
 
         </div>
       </div>
@@ -144,7 +160,7 @@
 
       function clearAll() {
         resetTransDateToCurrentDate()
-        $('#item_id').val('')
+        $('#item_id option[value=""]').prop('selected', true);
         $('#qty').val('')
         $('#amount').val('')
         $('#discount_or_commission').val('')
@@ -166,8 +182,11 @@
 	  }
 
 	  function populateForm(data) {
-        $('#transaction_date').val(data.sale_transaction.transaction_date)
+
+        var date = new Date(data.sale_transaction.transaction_date * 1000);
+        $('#transaction_date').val(date)
         $('#item_id option[value='+data.sale_transaction.item_id+']').prop('selected', true);
+        $('.select2').select2();
         $('#qty').val(data.sale_transaction.qty)
         $('#amount').val(data.sale_transaction.amount)
         $('#discount_or_commission').val(data.sale_transaction.discount_or_commission)

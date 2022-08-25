@@ -4,7 +4,7 @@
 
 @section("maincontent")
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">Item Form</h3>
@@ -19,21 +19,43 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <label for="">Item Name</label>
-            <input type="text" class="form-control" id="item_name">
+          <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="">Item Genre</label>
+                  <select id="item_genre_id" class="form-control select2"></select>
+                </div>
+                <div class="form-group">
+                  <label for="">Item Code</label>
+                  <select id="item_code_id" class="form-control select2"></select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="">Item Name</label>
+                  <input type="text" class="form-control" id="item_name">
+                </div>
+                <div class="form-group">
+                  <label for="">Item Description</label>
+                  <input type="text" class="form-control" id="item_description">
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label for="">Price</label>
+                  <input type="number" min="0" class="form-control" id="price">
+                </div>
+                <div class="form-group">
+                  <label for="">&nbsp;</label>
+                  <br>
+                  <button class="btn btn-success btn-block" id="btnsave"><i class="fas fa-save"></i> Save</button>
+                </div>
+              </div>
           </div>
-          <div class="form-group">
-            <label for="">Item Description</label>
-            <input type="text" class="form-control" id="item_description">
-          </div>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-success" id="btnsave"><i class="fas fa-save"></i> Save</button>
         </div>
       </div>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">List</h3>
@@ -47,7 +69,7 @@
             </button>
           </div>
         </div>
-        <div class="card-body" id="listarea">
+        <div class="card-body" id="listarea" style="overflow-x: auto;overflow-y: auto; max-height:500px;">
 
         </div>
       </div>
@@ -60,6 +82,8 @@
       let current_item_id = 0;
 
       getAll();
+      getItemCodes()
+      getItemGenres()
 
       function getAll() {
         $.ajax({
@@ -71,16 +95,53 @@
         })
       }
 
+      function getItemCodes() {
+          $.ajax({
+              url:'{{ route("ItemCodes_list_json") }}',
+              method:'get',
+              async : true,
+              success:function (data) {
+                  var $dropdown = $("#item_code_id");
+                  $dropdown.append($("<option />").val("").text("[ SELECT ]"));
+                  $.each(data, function() {
+                      $dropdown.append($("<option />").val(this.item_code_id).text(`${this.item_code_name}`));
+                  });
+                  console.log(data)
+                  return data;
+              }
+          })
+      }
+
+      function getItemGenres() {
+          $.ajax({
+              url:'{{ route("ItemGenres_list_json") }}',
+              method:'get',
+              async : true,
+              success:function (data) {
+                  var $dropdown = $("#item_genre_id");
+                  $dropdown.append($("<option />").val("").text("[ SELECT ]"));
+                  $.each(data, function() {
+                      $dropdown.append($("<option />").val(this.item_genre_id).text(`${this.item_genre_name}`));
+                  });
+                  console.log(data)
+                  return data;
+              }
+          })
+      }
+
       function save(isdelete=false) {
         $.ajax({
           url:'{{ route("items_create") }}',
           method:'post',
           data:{
             '_token':"{{ csrf_token() }}",
+            "item_code_id":$('#item_code_id :selected').val(),
+            "item_genre_id":$('#item_genre_id :selected').val(),
             "item_id":current_item_id,
             "isDelete":isdelete,
             'item_name':$('#item_name').val(),
-            'item_description':$('#item_description').val()
+            'item_description':$('#item_description').val(),
+            'price':$('#price').val(),
           },
           success:function(data){
             getAll()
@@ -90,8 +151,12 @@
       }
 
       function clearAll() {
-        $('#item_name').val('')
-        $('#item_description').val('')
+        $('#item_code_id option[value=""]').prop('selected', true);
+        $('#item_genre_id option[value=""]').prop('selected', true);
+        $('.select2').select2();
+        $('#item_name').val("")
+        $('#item_description').val("")
+        $('#price').val("")
       }
 
 	  function getSingle() {
@@ -109,8 +174,12 @@
 	  }
 
 	  function populateForm(data) {
+      $('#item_code_id option[value='+data.item.item_code_id+']').prop('selected', true);
+      $('#item_genre_id option[value='+data.item.item_genre_id+']').prop('selected', true);
+      $('.select2').select2();
 	  	$('#item_name').val(data.item.item_name)
-		$('#item_description').val(data.item.item_description)
+		  $('#item_description').val(data.item.item_description)
+		  $('#price').val(data.item.price)
 	  }
 
       $(document).on('click','#btnsave',function () {
@@ -122,7 +191,7 @@
         var thiss = $(this);
         var item_id = thiss.closest('tr').attr('id')
         current_item_id = item_id;
-		getSingle();
+		  getSingle();
       })
 
 	  $(document).on('click','.btndelete',function () {

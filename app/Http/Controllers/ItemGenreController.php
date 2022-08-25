@@ -24,6 +24,12 @@ class ItemGenreController extends Controller
         return view('item_genre._list')->with('item_genres',$list);
     }
 
+    public function GetAllJson()
+    {
+        $list = HelperModel::GetAll("item_genres");
+        return response()->json($list);
+    }
+
     public function GetSingle(Request $request)
     {
         $item_genre = HelperModel::GetSingle("item_genres","item_genre_id",$request->item_genre_id);

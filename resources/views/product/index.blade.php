@@ -47,7 +47,7 @@
             </button>
           </div>
         </div>
-        <div class="card-body" id="listarea">
+        <div class="card-body" id="listarea" style="overflow-x: auto;overflow-y: auto; max-height:500px;">
 
         </div>
       </div>

@@ -24,6 +24,12 @@ class ItemCodeController extends Controller
         return view('item_code._list')->with('item_codes',$list);
     }
 
+    public function GetAllJson()
+    {
+        $list = HelperModel::GetAll("item_codes");
+        return response()->json($list);
+    }
+
     public function GetSingle(Request $request)
     {
         $item_code = HelperModel::GetSingle("item_codes","item_code_id",$request->item_code_id);
