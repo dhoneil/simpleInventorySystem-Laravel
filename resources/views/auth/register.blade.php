@@ -18,7 +18,7 @@
 <div class="register-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="AdminLTE/index2.html" class="h1"><b>Booking</b>SYSTEM</a>
+      <a href="AdminLTE/index2.html" class="h1"><b>Inventory</b>SYSTEM</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
