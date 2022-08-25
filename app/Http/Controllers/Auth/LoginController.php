@@ -27,6 +27,6 @@ class LoginController extends Controller
             return redirect()->route('user_appointment');
         }
 
-        return redirect()->route('Appointments');
+        return redirect()->route('SaleTransactions');
     }
 }
