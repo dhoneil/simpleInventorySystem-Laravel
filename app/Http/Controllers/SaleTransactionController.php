@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemInOut;
 use App\Models\HelperModel;
 use Illuminate\Http\Request;
 use App\Models\SaleTransaction;
+use Illuminate\Support\Facades\DB;
 
 class SaleTransactionController extends Controller
 {
@@ -20,7 +22,11 @@ class SaleTransactionController extends Controller
 
     public function GetAll()
     {
-        $list = HelperModel::GetAll("sale_transactions");
+        // $list = HelperModel::GetAll("sale_transactions");
+        $list = DB::table('sale_transactions')
+                        ->join('items','items.item_id','=','sale_transactions.item_id')
+                        ->select('sale_transactions.*', 'items.item_name', 'items.item_description')
+                        ->get();
         return view('sale_transaction._list')->with('sale_transactions',$list);
     }
 
@@ -46,7 +52,15 @@ class SaleTransactionController extends Controller
             }
             else
             {
-                HelperModel::Create("sale_transactions",$request);
+                $res = HelperModel::Create("sale_transactions",$request);
+                if ($res > 0) {
+                    //save as out
+                    $out = new ItemInOut();
+                    $out->item_id = $request->item_id;
+                    $out->qty = $request->qty;
+                    $out->item_transaction_type = 2;
+                    $out->save();
+                }
             }
         }
     }

@@ -28,7 +28,7 @@
                     <input type="date" class="form-control" id="transaction_date">
                   </div>
                   <div class="form-group">
-                    <label for="">Item</label>
+                    <label for="">Item&nbsp;&nbsp;&nbsp;&nbsp;<span id="item_price_text">Price : <span id="item_price_value"></span></span></label>
                     <select id="item_id" class="form-control select2"></select>
                   </div>
                 </div>
@@ -98,6 +98,7 @@
 
       let current_sale_transaction_id = 0;
 
+      $('#item_price_text').hide();
       getAll();
       getItems();
       resetTransDateToCurrentDate();
@@ -213,6 +214,36 @@
 			save(true);
 		}
       })
+
+    $(document).on('change','#item_id',function (params) {
+      var item_id = $('#item_id :selected').val();
+      if (item_id != "") {
+        $.ajax({
+          url:'{{ route("items_single") }}',
+            method:'post',
+            data:{
+            '_token':"{{ csrf_token() }}",
+            'item_id':item_id,
+            },
+            success:function(data){
+              if (data) {
+                $('#item_price_text').show();
+                $('#item_price_value').text(data.item.price);
+              }
+            }
+        })
+      }else{
+        $('#item_price_text').hide();
+      }
+    })
+
+    $(document).on('change','#qty',function (params) {
+      var qty = $(this).val();
+      var price = $('#item_price_value').text();
+      var total_amount = parseFloat(qty) * parseFloat(price);
+      $('#amount').val(total_amount);
+
+    })
 
 
 

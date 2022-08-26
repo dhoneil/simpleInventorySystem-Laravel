@@ -16,7 +16,7 @@
         @foreach ($sale_transactions as $c)
             <tr id="{{ $c->sale_transaction_id }}">
                 <td>{{ $c->transaction_date }}</td>
-                <td>{{ $c->item_id }}</td>
+                <td>{{ $c->item_name.' - '.$c->item_description}}</td>
                 <td>{{ $c->qty }}</td>
                 <td>{{ $c->amount }}</td>
                 <td>{{ $c->discount_or_commission }}</td>

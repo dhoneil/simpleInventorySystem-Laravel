@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped table-sm table-hover">
     <thead style="background-color:#343a40; color:white;">
         <tr>
             <th>Code</th>

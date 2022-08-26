@@ -7,6 +7,7 @@ use Database\Seeders\UserSeeder;
 use Database\Seeders\ProductSeeder;
 use Database\Seeders\ServiceSeeder;
 use Database\Seeders\CustomerSeeder;
+use Database\Seeders\ItemCodeSeeder;
 use Database\Seeders\UserRoleSeeder;
 use Database\Seeders\BeauticianSeeder;
 use Database\Seeders\UserInformationSeeder;
@@ -27,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSeeder::class);
         $this->call(ProductSeeder::class);
         $this->call(UserRoleSeeder::class);
+        $this->call(ItemCodeSeeder::class);
     }
 }

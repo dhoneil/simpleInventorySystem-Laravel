@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped table-sm table-hover">
     <thead style="background-color:#343a40; color:white;">
         <tr>
             <th>Genre</th>
@@ -14,8 +14,8 @@
     <tbody>
         @foreach ($items as $c)
             <tr id="{{ $c->item_id }}">
-                <td>{{ $c->item_genre_id }}</td>
-                <td>{{ $c->item_code_id }}</td>
+                <td>{{ $c->item_genre_name }}</td>
+                <td>{{ $c->item_code_name }}</td>
                 <td>{{ $c->item_name }}</td>
                 <td>{{ $c->item_description }}</td>
                 <td>{{ $c->price }}</td>

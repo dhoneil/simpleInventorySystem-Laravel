@@ -22,7 +22,11 @@ class ItemController extends Controller
 
     public function GetAll()
     {
-        $list = HelperModel::GetAll("items");
+        $list = DB::table('items')
+                        ->join('item_codes','items.item_code_id','=','item_codes.item_code_id')
+                        ->join('item_genres','items.item_genre_id','=','item_genres.item_genre_id')
+                        ->select('items.*', 'item_codes.item_code_name', 'item_genres.item_genre_name')
+                        ->get();
         return view('item._list')->with('items',$list);
     }
 
