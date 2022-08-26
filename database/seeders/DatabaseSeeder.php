@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ItemGenre;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\ProductSeeder;
@@ -9,6 +10,7 @@ use Database\Seeders\ServiceSeeder;
 use Database\Seeders\CustomerSeeder;
 use Database\Seeders\ItemCodeSeeder;
 use Database\Seeders\UserRoleSeeder;
+use Database\Seeders\ItemGenreSeeder;
 use Database\Seeders\BeauticianSeeder;
 use Database\Seeders\UserInformationSeeder;
 use Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter;
@@ -29,5 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
         $this->call(UserRoleSeeder::class);
         $this->call(ItemCodeSeeder::class);
+        $this->call(ItemGenreSeeder::class);
     }
 }

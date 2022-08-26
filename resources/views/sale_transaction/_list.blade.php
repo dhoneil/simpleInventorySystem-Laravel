@@ -29,10 +29,10 @@
         @endforeach
         <tr>
             <td colspan="2"></td>
-            <td id="qty_value_total"></td>
-            <td id="amount_value_total"></td>
-            <td id="discount_or_commission_value_total"></td>
-            <td id="net_value_total"></td>
+            <td id="qty_value_total" style="font-weight: bold;"></td>
+            <td id="amount_value_total" style="font-weight: bold;"></td>
+            <td id="discount_or_commission_value_total" style="font-weight: bold;"></td>
+            <td id="net_value_total" style="font-weight: bold;"></td>
         </tr>
     </tbody>
 </table>

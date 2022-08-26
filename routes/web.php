@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SaleTransactionController;
 use App\Http\Controllers\UserInformationController;
 use App\Http\Controllers\RegistrationTokenController;
+use App\Http\Controllers\PurchaseTransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +123,13 @@ Route::get('/admin/SaleTransactions_list',[SaleTransactionController::class,'Get
 Route::get('/admin/SaleTransactions_list_json',[SaleTransactionController::class,'GetAllJson'])->name('SaleTransactions_list_json');
 Route::post('/admin/SaleTransactions_single',[SaleTransactionController::class,'GetSingle'])->name('SaleTransactions_single');
 Route::post('/admin/SaleTransactions_create',[SaleTransactionController::class,'Save'])->name('SaleTransactions_create');
+
+//PURCHASE TRANSACTION
+Route::get('/admin/PurchaseTransactions',[PurchaseTransactionController::class,'index'])->name('PurchaseTransactions');
+Route::get('/admin/PurchaseTransactions_list',[PurchaseTransactionController::class,'GetAll'])->name('PurchaseTransactions_list');
+Route::get('/admin/PurchaseTransactions_list_json',[PurchaseTransactionController::class,'GetAllJson'])->name('PurchaseTransactions_list_json');
+Route::post('/admin/PurchaseTransactions_single',[PurchaseTransactionController::class,'GetSingle'])->name('PurchaseTransactions_single');
+Route::post('/admin/PurchaseTransactions_create',[PurchaseTransactionController::class,'Save'])->name('PurchaseTransactions_create');
 
 //USERS
 Route::get('/admin/Users',[UserInformationController::class,'index'])->name('Users');

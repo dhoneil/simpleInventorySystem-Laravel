@@ -17,24 +17,24 @@ class PurchaseTransactionController extends Controller
 
     public function index()
     {
-        return view('sale_transaction.index');
+        return view('purchase_transaction.index');
     }
 
     public function GetAll()
     {
-        // $list = HelperModel::GetAll("sale_transactions");
+        // $list = HelperModel::GetAll("purchase_transactions");
         $list = DB::table('purchase_transactions')
                         ->join('items','items.item_id','=','purchase_transactions.item_id')
-                        ->select('purchase_transactions.*', 'items.item_name', 'items.item_description')
+                        ->select('purchase_transactions.*', 'items.item_name', 'items.item_description','items.price')
                         ->get();
-        return view('sale_transaction._list')->with('purchase_transactions',$list);
+        return view('purchase_transaction._list')->with('purchase_transactions',$list);
     }
 
     public function GetSingle(Request $request)
     {
-        $sale_transaction = HelperModel::GetSingle("sale_transactions","sale_transaction_id",$request->sale_transaction_id);
+        $purchase_transaction = HelperModel::GetSingle("purchase_transactions","purchase_transaction_id",$request->purchase_transaction_id);
         return response()->json([
-            'sale_transaction' => $sale_transaction
+            'purchase_transaction' => $purchase_transaction
         ]);
     }
 
@@ -42,17 +42,17 @@ class PurchaseTransactionController extends Controller
     {
         if ($request->isDelete == 'true')
         {
-            HelperModel::DeleteSingle("sale_transactions","sale_transaction_id",$request->sale_transaction_id);
+            HelperModel::DeleteSingle("purchase_transactions","purchase_transaction_id",$request->purchase_transaction_id);
         }
         else
         {
-            if ($request->sale_transaction_id > 0)
+            if ($request->purchase_transaction_id > 0)
             {
-                HelperModel::UpdateModel("sale_transactions","sale_transaction_id",$request->sale_transaction_id,$request);
+                HelperModel::UpdateModel("purchase_transactions","purchase_transaction_id",$request->purchase_transaction_id,$request);
             }
             else
             {
-                $res = HelperModel::Create("sale_transactions",$request);
+                $res = HelperModel::Create("purchase_transactions",$request);
                 if ($res > 0) {
                     //save as out
                     $in = new ItemInOut();

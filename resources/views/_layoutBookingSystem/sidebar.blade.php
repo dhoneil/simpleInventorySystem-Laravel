@@ -106,7 +106,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="SaleTransactions" class="nav-link {{ Route::currentRouteNamed('SaleTransactions') ? 'active' : '' }} ">
+                  <a href="PurchaseTransactions" class="nav-link {{ Route::currentRouteNamed('PurchaseTransactions') ? 'active' : '' }} ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Purchases (In)</p>
                   </a>
