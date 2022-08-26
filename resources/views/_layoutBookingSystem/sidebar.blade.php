@@ -108,7 +108,13 @@
                 <li class="nav-item">
                   <a href="SaleTransactions" class="nav-link {{ Route::currentRouteNamed('SaleTransactions') ? 'active' : '' }} ">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Sales</p>
+                    <p>Purchases (In)</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="SaleTransactions" class="nav-link {{ Route::currentRouteNamed('SaleTransactions') ? 'active' : '' }} ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sales (Out)</p>
                   </a>
                 </li>
               </ul>

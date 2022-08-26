@@ -249,11 +249,24 @@
 <script src="{{ asset('AdminLTE/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
 
 <script src="{{ asset('AdminLTE/dist/js/demo.js') }}"></script>
+<script src="{{ asset('AdminLTE/plugins/moment/moment.min.js') }}"></script>
 
 
 
 
 <script type="text/javascript">
+  $.fn.digits = function(){
+      return this.each(function(){
+          $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
+      })
+  }
+
+  Date.prototype.toDateInputValue = (function() {
+      var local = new Date(this);
+      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+      return local.toJSON().slice(0,10);
+  });
+
   $(document).ready(function () {
     $('.select2').select2();
   })

@@ -88,15 +88,10 @@
 
   <script type="text/javascript">
 
-    Date.prototype.toDateInputValue = (function() {
-        var local = new Date(this);
-        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-        return local.toJSON().slice(0,10);
-    });
-
     $(document).ready(function() {
 
       let current_sale_transaction_id = 0;
+      let current_transaction_date = "";
 
       $('#item_price_text').hide();
       getAll();
@@ -105,7 +100,9 @@
 
 
     function resetTransDateToCurrentDate() {
-        $('#transaction_date').val(new Date().toDateInputValue());
+        var datenow = new Date().toDateInputValue();
+        current_transaction_date = datenow;
+        $('#transaction_date').val(datenow);
     }
 
 
@@ -145,7 +142,7 @@
             '_token':"{{ csrf_token() }}",
             "sale_transaction_id":current_sale_transaction_id,
             "isDelete":isdelete,
-            'transaction_date':$('#transaction_date').val(),
+            'transaction_date':current_transaction_date,
             'item_id':$('#item_id :selected').val(),
             'qty':$('#qty').val(),
             'amount':$('#amount').val(),
@@ -157,6 +154,7 @@
           }
         })
         current_sale_transaction_id=0;
+        $("#transaction_date").prop('disabled', false);
       }
 
       function clearAll() {
@@ -178,6 +176,7 @@
             },
             success:function(data){
                 populateForm(data)
+                $("#transaction_date").prop('disabled', true);
             }
         })
 	  }
@@ -186,6 +185,8 @@
 
         var date = new Date(data.sale_transaction.transaction_date * 1000);
         $('#transaction_date').val(date)
+        current_transaction_date = data.sale_transaction.transaction_date;
+        console.log(current_transaction_date)
         $('#item_id option[value='+data.sale_transaction.item_id+']').prop('selected', true);
         $('.select2').select2();
         $('#qty').val(data.sale_transaction.qty)
