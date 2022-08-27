@@ -140,6 +140,7 @@
         })
         current_purchase_transaction_id=0;
         $("#transaction_date").prop('disabled', false);
+        $('#item_price_text').hide();
       }
 
       function clearAll() {

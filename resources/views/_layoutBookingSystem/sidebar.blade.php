@@ -131,12 +131,12 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                   <a href="UserRoles" class="nav-link {{ Route::currentRouteNamed('UserRoles') ? 'active' : '' }} ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>User Roles</p>
                   </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                   <a href="Users" class="nav-link {{ Route::currentRouteNamed('Users') ? 'active' : '' }} ">
                     <i class="far fa-circle nav-icon"></i>

@@ -254,6 +254,21 @@
 
 
 
+<div class="modal fade" id="loadingmodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+              <h3>
+                <center>Please Wait...</center>
+              </h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 <script type="text/javascript">
   $.fn.digits = function(){
       return this.each(function(){

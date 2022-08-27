@@ -62,4 +62,18 @@ class ItemController extends Controller
             }
         }
     }
+
+    public function GetInOutItems(Request $request)
+    {
+        $item_id = $request->item_id;
+        $transaction_type = $request->transaction_type;
+        $list = DB::table('item_in_outs')
+                        ->join('items','item_in_outs.item_id','=','items.item_id')
+                        ->where('item_in_outs.item_id','=',$item_id)
+                        ->where('item_in_outs.item_transaction_type','=',$transaction_type)
+                        ->select('items.*', 'item_in_outs.created_at',
+                                 'item_in_outs.qty as qty')
+                        ->get();
+        return view('item._itemInlist')->with('items',$list);
+    }
 }

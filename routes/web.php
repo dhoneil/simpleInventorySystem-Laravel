@@ -102,6 +102,7 @@ Route::get('/admin/Items_list',[ItemController::class,'GetAll'])->name('Items_li
 Route::get('/admin/items_list_json',[ItemController::class,'GetAllJson'])->name('items_list_json');
 Route::post('/admin/items_single',[ItemController::class,'GetSingle'])->name('items_single');
 Route::post('/admin/items_create',[ItemController::class,'Save'])->name('items_create');
+Route::post('/admin/ItemInOutList',[ItemController::class,'GetInOutItems'])->name('ItemInOutList');
 
 //ITEM CODE
 Route::get('/admin/ItemCodes',[ItemCodeController::class,'index'])->name('ItemCodes');

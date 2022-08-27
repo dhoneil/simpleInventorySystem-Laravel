@@ -76,6 +76,44 @@
     </div>
   </div>
 
+
+	<div class="modal fade" id="itemledgermodal">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Item Ledger</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body itemledgermodalbody">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="card">
+								<div class="card-header">
+									<span>In</span>
+								</div>
+								<div class="card-body" id="itemsinarea" style="overflow-x: auto; overflow-y:auto; max-height:500px;">
+
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="card">
+								<div class="card-header">
+									<span>Out</span>
+								</div>
+								<div class="card-body" id="itemsoutarea" style="overflow-x: auto; overflow-y:auto; max-height:500px;">
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
   <script type="text/javascript">
     $(document).ready(function() {
 
@@ -195,13 +233,44 @@
       })
 
 	  $(document).on('click','.btndelete',function () {
-        var thiss = $(this);
-        var customer_id = thiss.closest('tr').attr('id')
-        current_item_id = customer_id;
-		if (confirm('Are you sure to delete this item?')) {
-			save(true);
-		}
-      })
+      var thiss = $(this);
+          var item_id = thiss.closest('tr').attr('id')
+          current_item_id = item_id;
+      if (confirm('Are you sure to delete this item?')) {
+        save(true);
+      }
+    })
+
+    $(document).on('click','.btnitemledger',function () {
+    	var thiss = $(this);
+    	var item_id = thiss.closest('tr').attr('id')
+    	current_item_id = item_id;
+		getInOutItems(current_item_id,1);
+		getInOutItems(current_item_id,2);
+		$('#itemledgermodal').modal('show')
+    })
+
+	function getInOutItems(item_id, transaction_type) {
+		$.ajax({
+			url:'{{ route("ItemInOutList") }}',
+			method:'post',
+			data:{
+				'_token' : "{{ csrf_token() }}",
+				'item_id' : item_id,
+				'transaction_type' : transaction_type,
+			},
+			success:function (data) {
+				if (transaction_type == 1) {
+					$('#itemsinarea').html(data)
+				}
+				if (transaction_type == 2) {
+					$('#itemsoutarea').html(data)
+				}
+			}
+        })
+	}
+
+
 
 
 

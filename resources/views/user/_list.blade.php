@@ -9,9 +9,9 @@
             <th>Name</th>
             <th>Email/Username</th>
             <th>Role</th>
-            <th>
+            {{-- <th>
                 <i class="fas fa-cog"></i>
-            </th>
+            </th> --}}
         </tr>
     </thead>
     <tbody>
@@ -25,10 +25,10 @@
                         echo $role->role_name;
                     @endphp
                 </td>
-                <td>
+                {{-- <td>
                     <button class="btn btn-xs btn-success btnedit" title="Edit Customer"><i class="fas fa-edit"></i></button>
                     <button class="btn btn-xs btn-danger btndelete" title="Delete Customer"><i class="fas fa-trash"></i></button>
-                </td>
+                </td> --}}
             </tr>
         @endforeach
     </tbody>
