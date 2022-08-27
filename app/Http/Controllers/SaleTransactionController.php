@@ -25,7 +25,7 @@ class SaleTransactionController extends Controller
         // $list = HelperModel::GetAll("sale_transactions");
         $list = DB::table('sale_transactions')
                         ->join('items','items.item_id','=','sale_transactions.item_id')
-                        ->select('sale_transactions.*', 'items.item_name', 'items.item_description')
+                        ->select('sale_transactions.*', 'items.item_name', 'items.item_description','items.price')
                         ->get();
         return view('sale_transaction._list')->with('sale_transactions',$list);
     }

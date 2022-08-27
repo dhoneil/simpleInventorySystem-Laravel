@@ -5,16 +5,13 @@
 @section("maincontent")
   <div class="row">
     <div class="col-sm-12">
-      <div class="card">
+      <div class="card" id="itemformcard">
         <div class="card-header">
           <h3 class="card-title">Item Form</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
             </button>
           </div>
         </div>
@@ -122,6 +119,16 @@
       getAll();
       getItemCodes()
       getItemGenres()
+      toggleitemformcard("hide")
+
+      function toggleitemformcard(cardaction) {
+        if (cardaction=="show") {
+          $('#itemformcard').removeClass("collapsed-card");
+        }
+        if (cardaction=="hide") {
+          $('#itemformcard').addClass("collapsed-card");
+        }
+      }
 
       function getAll() {
         $.ajax({
@@ -221,6 +228,7 @@
 	  }
 
       $(document).on('click','#btnsave',function () {
+        toggleitemformcard("hide")
         save();
         clearAll();
       })
@@ -229,7 +237,8 @@
         var thiss = $(this);
         var item_id = thiss.closest('tr').attr('id')
         current_item_id = item_id;
-		  getSingle();
+		    getSingle();
+        toggleitemformcard("show")
       })
 
 	  $(document).on('click','.btndelete',function () {

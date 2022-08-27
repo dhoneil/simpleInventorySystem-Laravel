@@ -19,7 +19,6 @@ class CreateSaleTransactionsTable extends Migration
             $table->dateTime('transaction_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('item_id')->nullable(true);
             $table->decimal('qty')->nullable(true);
-            $table->decimal('amount')->nullable(true);
             $table->decimal('discount_or_commission')->nullable(true);
             $table->decimal('net')->nullable(true);
             $table->timestamps();

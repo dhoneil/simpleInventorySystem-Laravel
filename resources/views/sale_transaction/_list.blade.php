@@ -18,9 +18,20 @@
                 <td class="transaction_date_value">{{ $c->transaction_date }}</td>
                 <td>{{ $c->item_name.' - '.$c->item_description}}</td>
                 <td class="qty_value">{{ $c->qty }}</td>
-                <td class="amount_value">{{ $c->amount }}</td>
-                <td class="discount_or_commission_value">{{ $c->discount_or_commission }}</td>
-                <td class="net_value">{{ $c->net }}</td>
+                <td class="amount_value">
+                    @php
+                        $price = $c->price;
+                        $qty = $c->qty;
+                        $amount = $price * $qty;
+                        echo $amount;
+                    @endphp
+                </td>
+                <td class="discount_or_commission_value">
+                    {{ ($c->discount_or_commission == "" ? 0 : $c->discount_or_commission) }}
+                </td>
+                <td class="net_value">
+                    {{ ($c->net == "" ? 0 : $c->net) }}
+                </td>
                 <td>
                     <button class="btn btn-xs btn-success btnedit" title="Edit Customer"><i class="fas fa-edit"></i></button>
                     {{-- <button class="btn btn-xs btn-danger btndelete" title="Delete Customer"><i class="fas fa-trash"></i></button> --}}

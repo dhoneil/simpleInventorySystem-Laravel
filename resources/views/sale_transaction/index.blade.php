@@ -39,7 +39,7 @@
                   </div>
                   <div class="form-group">
                     <label for="">Amount</label>
-                    <input type="number" class="form-control" id="amount">
+                    <input type="number" class="form-control" id="amount" disabled>
                   </div>
                 </div>
                 <div class="col-sm-4">
@@ -125,6 +125,7 @@
 
 
       function getAll() {
+        toggleLoadingModal(null,'show');
         $.ajax({
           url:'{{ route("SaleTransactions_list") }}',
           method:'get',
@@ -132,9 +133,11 @@
             $('#listarea').html(data)
           }
         })
+        toggleLoadingModal(null,'hide');
       }
 
       function save(isdelete=false) {
+        toggleLoadingModal('Saving Item','show');
         $.ajax({
           url:'{{ route("SaleTransactions_create") }}',
           method:'post',
@@ -145,7 +148,6 @@
             'transaction_date':current_transaction_date,
             'item_id':$('#item_id :selected').val(),
             'qty':$('#qty').val(),
-            'amount':$('#amount').val(),
             'discount_or_commission':$('#discount_or_commission').val(),
             'net':$('#net').val(),
           },
@@ -155,6 +157,7 @@
         })
         current_sale_transaction_id=0;
         $("#transaction_date").prop('disabled', false);
+        toggleLoadingModal('Saving Item','hide');
       }
 
       function clearAll() {
@@ -219,6 +222,7 @@
     $(document).on('change','#item_id',function (params) {
       var item_id = $('#item_id :selected').val();
       if (item_id != "") {
+        toggleLoadingModal('Getting Item Price','show');
         $.ajax({
           url:'{{ route("items_single") }}',
             method:'post',
@@ -234,8 +238,11 @@
             }
         })
       }else{
+        $('#qty').val('');
+        $('#amount').val('');
         $('#item_price_text').hide();
       }
+      toggleLoadingModal(null,'hide');
     })
 
     $(document).on('change','#qty',function (params) {

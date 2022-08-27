@@ -20,8 +20,8 @@
                     @php
                         $price = $c->price;
                         $qty = $c->qty;
-                        $total = $price * $qty;
-                        echo $total;
+                        $amount = $price * $qty;
+                        echo $amount;
                     @endphp
                 </td>
                 <td>
