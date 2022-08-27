@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Booking System | @yield('title')</title>
+  <title>Inventory System | @yield('title')</title>
 
   <!-- jQuery -->
   <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
