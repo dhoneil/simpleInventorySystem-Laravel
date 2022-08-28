@@ -79,6 +79,10 @@
           },
           success:function(data){
             getAll()
+            clearAll();
+          },
+          error:function(data){
+            toggleAlert('error','Error',data.responseJSON.message)
           }
         })
         current_item_genre_id=0;
@@ -108,7 +112,6 @@
 
       $(document).on('click','#btnsave',function () {
         save();
-        clearAll();
       })
 
       $(document).on('click','.btnedit',function () {

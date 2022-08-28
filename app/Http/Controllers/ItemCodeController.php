@@ -46,13 +46,17 @@ class ItemCodeController extends Controller
         }
         else
         {
-            if ($request->item_code_id > 0)
-            {
-                HelperModel::UpdateModel("item_codes","item_code_id",$request->item_code_id,$request);
-            }
-            else
-            {
-                HelperModel::Create("item_codes",$request);
+            $validated = $request->validate([
+                'item_code_name' => 'required|unique:item_codes'
+            ]);
+
+            if ($validated) {
+                if ($request->item_code_id > 0){
+                    HelperModel::UpdateModel("item_codes","item_code_id",$request->item_code_id,$request);
+                }
+                else{
+                    HelperModel::Create("item_codes",$request);
+                }
             }
         }
     }

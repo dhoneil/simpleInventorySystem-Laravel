@@ -79,6 +79,9 @@
           },
           success:function(data){
             getAll()
+          },
+          error:function(data){
+            toggleAlert('error','Error',data.responseJSON.message)
           }
         })
         current_user_role_id=0;

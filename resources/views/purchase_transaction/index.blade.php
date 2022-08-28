@@ -136,6 +136,9 @@
           },
           success:function(data){
             getAll()
+          },
+          error:function(data){
+            toggleAlert('error','Error',data.responseJSON.message)
           }
         })
         current_purchase_transaction_id=0;

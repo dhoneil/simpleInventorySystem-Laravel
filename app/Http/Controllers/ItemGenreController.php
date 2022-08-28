@@ -46,13 +46,19 @@ class ItemGenreController extends Controller
         }
         else
         {
-            if ($request->item_genre_id > 0)
-            {
-                HelperModel::UpdateModel("item_genres","item_genre_id",$request->item_genre_id,$request);
-            }
-            else
-            {
-                HelperModel::Create("item_genres",$request);
+            $validated = $request->validate([
+                'item_genre_name' => 'required|unique:item_genres'
+            ]);
+
+            if ($validated) {
+                if ($request->item_genre_id > 0)
+                {
+                    HelperModel::UpdateModel("item_genres","item_genre_id",$request->item_genre_id,$request);
+                }
+                else
+                {
+                    HelperModel::Create("item_genres",$request);
+                }
             }
         }
     }

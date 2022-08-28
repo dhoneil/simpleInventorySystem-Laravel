@@ -7,6 +7,7 @@ use App\Models\HelperModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Response;
 
 class ItemController extends Controller
 {
@@ -52,13 +53,21 @@ class ItemController extends Controller
         }
         else
         {
-            if ($request->item_id > 0)
-            {
-                HelperModel::UpdateModel("items","item_id",$request->item_id,$request);
-            }
-            else
-            {
-                HelperModel::Create("items",$request);
+            $is_unique_item = DB::table('items')
+                                ->where('item_name',$request->item_name)
+                                ->where('item_description',$request->item_description)
+                                ->first();
+
+            if ($is_unique_item == null && $request->item_name != null) {
+                if ($request->item_id > 0)
+                    HelperModel::UpdateModel("items","item_id",$request->item_id,$request);
+                else
+                    HelperModel::Create("items",$request);
+            }else{
+                return response()->json([
+                    'code'=>404,
+                    'message'=>($request->item_name == null ? "Item name can not be null" : 'Item with the same name and description already exists'),
+                ],404);
             }
         }
     }

@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/dropzone/min/dropzone.min.css') }}">
 
   <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css?v=3.2.0') }}">
+  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/sweetalert2/sweetalert2.min.css') }}">
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -133,6 +134,7 @@
 
 <script src="{{ asset('AdminLTE/dist/js/demo.js') }}"></script>
 <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js') }}"></script>
+<script src="{{ asset('AdminLTE/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
 
 
@@ -169,6 +171,14 @@
     var loadingmessagefinal = (loadingmessage!=null?loadingmessage : "Please wait...");
     $('#loadingmessage').text(loadingmessagefinal);
     $('#loadingmodal').modal(`${modalaction}`)
+  }
+
+  function toggleAlert(icon,title,text) {
+    Swal.fire({
+      icon: icon,
+      title: title,
+      text: text
+    })
   }
 
   $(document).ready(function () {

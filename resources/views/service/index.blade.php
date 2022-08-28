@@ -84,6 +84,9 @@
           },
           success:function(data){
             getAll()
+          },
+          error:function(data){
+            toggleAlert('error','Error',data.responseJSON.message)
           }
         })
         current_Service_id=0;

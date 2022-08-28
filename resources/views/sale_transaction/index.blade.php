@@ -153,6 +153,9 @@
           },
           success:function(data){
             getAll()
+          },
+          error:function(data){
+            toggleAlert('error','Error',data.responseJSON.message)
           }
         })
         current_sale_transaction_id=0;

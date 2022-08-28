@@ -79,6 +79,9 @@
           },
           success:function(data){
             getAll()
+          },
+          error:function(data){
+            toggleAlert('error','Error',data.responseJSON.message)
           }
         })
         current_item_code_id=0;

@@ -190,6 +190,11 @@
           },
           success:function(data){
             getAll()
+            clearAll();
+          },
+          error:function(data){
+            console.log(data)
+            toggleAlert('error','Error',data.responseJSON.message)
           }
         })
         current_item_id=0;
@@ -230,7 +235,6 @@
       $(document).on('click','#btnsave',function () {
         toggleitemformcard("hide")
         save();
-        clearAll();
       })
 
       $(document).on('click','.btnedit',function () {
