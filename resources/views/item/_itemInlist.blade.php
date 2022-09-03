@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped table-sm table-hover">
+<table class="table table-bordered table-striped table-sm table-hover itemledger">
     <thead style="background-color:#343a40; color:white;">
         <tr>
             <th>Date</th>
@@ -18,6 +18,20 @@
 </table>
 
 <script>
+
+    $(document).ready(function () {
+        $('.itemledger').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "bDestroy": true
+        });
+    })
+
     $('.created_at_value').each(function() {
         var thiss = $(this)
         var val = thiss.text();
