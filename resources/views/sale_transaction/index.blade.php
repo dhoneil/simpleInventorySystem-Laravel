@@ -90,6 +90,8 @@
 
     $(document).ready(function() {
 
+
+
       let current_sale_transaction_id = 0;
       let current_transaction_date = "";
 

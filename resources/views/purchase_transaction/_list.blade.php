@@ -1,4 +1,4 @@
-<table class="table table-sm table-bordered table-striped">
+<table class="table table-sm table-bordered table-striped" id="purchasetransactiontable">
     <thead style="background-color:#343a40; color:white;">
         <tr>
             <th>Date</th>
@@ -32,19 +32,32 @@
                 </td>
             </tr>
         @endforeach
+    </tbody>
+    <tfoot>
         <tr>
-            <td colspan="2"></td>
+            <td id="" style="font-weight: bold;"></td>
+            <td id="" style="font-weight: bold;"></td>
             <td id="cost_value_total" style="font-weight: bold;"></td>
             <td id="qty_value_total" style="font-weight: bold;"></td>
             <td id="amount_value_total" style="font-weight: bold;"></td>
             <td id="discount_or_commission_value_total"></td>
-            <td id="net_value_total"></td>
         </tr>
-    </tbody>
+    </tfoot>
 </table>
 
 <script >
     $(document).ready(function (params) {
+
+        $('#purchasetransactiontable').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "bDestroy": true
+        });
 
 
         $('.transaction_date_value').each(function() {

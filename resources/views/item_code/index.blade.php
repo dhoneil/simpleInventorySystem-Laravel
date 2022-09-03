@@ -53,6 +53,8 @@
   <script type="text/javascript">
     $(document).ready(function() {
 
+
+
       let current_item_code_id = 0;
 
       getAll();

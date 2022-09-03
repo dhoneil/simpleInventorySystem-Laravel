@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped table-sm table-hover">
+<table class="table table-bordered table-striped table-sm table-hover" id="itemgenretable">
     <thead style="background-color:#343a40; color:white;">
         <tr>
             <th>Genre</th>
@@ -19,3 +19,16 @@
         @endforeach
     </tbody>
 </table>
+
+<script>
+    $('#itemgenretable').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        "bDestroy": true
+    });
+</script>
