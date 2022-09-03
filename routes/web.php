@@ -15,6 +15,7 @@ use App\Http\Controllers\BeauticianController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\SaleTransactionController;
 use App\Http\Controllers\UserInformationController;
 use App\Http\Controllers\RegistrationTokenController;
@@ -131,6 +132,9 @@ Route::get('/admin/PurchaseTransactions_list',[PurchaseTransactionController::cl
 Route::get('/admin/PurchaseTransactions_list_json',[PurchaseTransactionController::class,'GetAllJson'])->name('PurchaseTransactions_list_json');
 Route::post('/admin/PurchaseTransactions_single',[PurchaseTransactionController::class,'GetSingle'])->name('PurchaseTransactions_single');
 Route::post('/admin/PurchaseTransactions_create',[PurchaseTransactionController::class,'Save'])->name('PurchaseTransactions_create');
+
+//PROFIT
+Route::get('/admin/Profit',[ProfitController::class,'index'])->name('Profit');
 
 //USERS
 Route::get('/admin/Users',[UserInformationController::class,'index'])->name('Users');

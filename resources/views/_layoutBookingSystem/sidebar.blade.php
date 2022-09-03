@@ -117,6 +117,12 @@
                     <p>Sales (Out)</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="Profit" class="nav-link {{ Route::currentRouteNamed('Profit') ? 'active' : '' }} ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Profit</p>
+                  </a>
+                </li>
               </ul>
             </li>
           </ul>
