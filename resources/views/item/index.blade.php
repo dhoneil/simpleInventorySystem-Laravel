@@ -119,7 +119,7 @@
       getAll();
       getItemCodes()
       getItemGenres()
-      toggleitemformcard("hide")
+      // toggleitemformcard("hide")
 
       function toggleitemformcard(cardaction) {
         if (cardaction=="show") {
@@ -233,7 +233,7 @@
 	  }
 
       $(document).on('click','#btnsave',function () {
-        toggleitemformcard("hide")
+        // toggleitemformcard("hide")
         save();
       })
 
@@ -242,7 +242,7 @@
         var item_id = thiss.closest('tr').attr('id')
         current_item_id = item_id;
 		    getSingle();
-        toggleitemformcard("show")
+        // toggleitemformcard("show")
       })
 
 	  $(document).on('click','.btndelete',function () {
