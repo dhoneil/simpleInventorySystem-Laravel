@@ -22,19 +22,26 @@
           <div class="row">
             <div class="col-sm-10">
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                   <div class="form-group">
                     <label for="">Transaction Date</label>
                     <input type="date" class="form-control" id="transaction_date">
                   </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <div class="form-group">
-                        <label for="">Item&nbsp;&nbsp;&nbsp;&nbsp;<span id="item_price_text">Price : <span id="item_price_value"></span></span></label>
+                        <!-- <label for="">Item&nbsp;&nbsp;&nbsp;&nbsp;<span id="item_price_text">Price : <span id="item_price_value"></span></span></label> -->
+                        <label for="">Item</label>
                         <select id="item_id" class="form-control select2"></select>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="">Cost</label>
+                        <input type="number" class="form-control number" id="price">
+                    </div>
+                </div>
+                <div class="col-sm-3">
                     <div class="form-group">
                         <label for="">Qty</label>
                         <input type="number" class="form-control" id="qty">
@@ -132,6 +139,7 @@
             "isDelete":isdelete,
             'transaction_date':current_transaction_date,
             'item_id':$('#item_id :selected').val(),
+            'cost' : $('#price').val(),
             'qty':$('#qty').val(),
           },
           success:function(data){
@@ -175,6 +183,7 @@
         current_transaction_date = data.purchase_transaction.transaction_date;
         console.log(current_transaction_date)
         $('#item_id option[value='+data.purchase_transaction.item_id+']').prop('selected', true);
+        $('#price').val(data.purchase_transaction.cost)
         $('.select2').select2();
         $('#qty').val(data.purchase_transaction.qty)
 	  }
@@ -214,6 +223,7 @@
               if (data) {
                 $('#item_price_text').show();
                 $('#item_price_value').text(data.item.price);
+                $('#price').val(data.item.price)
               }
             }
         })

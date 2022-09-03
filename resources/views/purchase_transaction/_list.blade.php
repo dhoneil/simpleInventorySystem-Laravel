@@ -3,6 +3,7 @@
         <tr>
             <th>Date</th>
             <th>Item</th>
+            <th>Cost</th>
             <th>Qty</th>
             <th>Amount</th>
             <th>
@@ -15,12 +16,13 @@
             <tr id="{{ $c->purchase_transaction_id }}" {{ $c->price }} {{ $c->qty }}>
                 <td class="transaction_date_value">{{ $c->transaction_date }}</td>
                 <td>{{ $c->item_name.' - '.$c->item_description}}</td>
+                <td class="cost_value">{{$c->cost}}</td>
                 <td class="qty_value">{{ $c->qty }}</td>
                 <td class="amount_value">
                     @php
-                        $price = $c->price;
+                        $cost = $c->cost;
                         $qty = $c->qty;
-                        $amount = $price * $qty;
+                        $amount = $cost * $qty;
                         echo $amount;
                     @endphp
                 </td>
@@ -32,6 +34,7 @@
         @endforeach
         <tr>
             <td colspan="2"></td>
+            <td id="cost_value_total" style="font-weight: bold;"></td>
             <td id="qty_value_total" style="font-weight: bold;"></td>
             <td id="amount_value_total" style="font-weight: bold;"></td>
             <td id="discount_or_commission_value_total"></td>
@@ -49,6 +52,14 @@
             var val = thiss.text();
             var trans_date = moment(val).format('MMMM DD, YYYY')
             thiss.text(trans_date);
+        });
+
+        var sumcost = 0;
+        $('.cost_value').each(function() {
+            var thiss = $(this)
+            var qty = parseFloat(thiss.text());
+            var total = parseFloat(sumcost += qty);
+            $('#cost_value_total').text(total).digits()
         });
 
 

@@ -18,6 +18,7 @@ class CreatePurchaseTransactionsTable extends Migration
             $table->id('purchase_transaction_id');
             $table->dateTime('transaction_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('item_id')->nullable(true);
+            $table->decimal('cost')->nullable(true);
             $table->decimal('qty')->nullable(true);
             $table->timestamps();
         });

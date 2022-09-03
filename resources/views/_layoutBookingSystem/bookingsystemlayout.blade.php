@@ -181,6 +181,10 @@
     })
   }
 
+  $(document).on('input','.number',function (event) {
+	$(this).val($(this).val().replace(/[^a-z0-9]/gi, ''));
+  })
+
   $(document).ready(function () {
     $('.select2').select2();
   })

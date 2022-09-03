@@ -35,7 +35,7 @@
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="">Qty</label>
-                    <input type="number" class="form-control" id="qty">
+                    <input type="number" class="form-control number" id="qty" min="0">
                   </div>
                   <div class="form-group">
                     <label for="">Amount</label>
@@ -45,11 +45,11 @@
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label for="">Discount/Commission</label>
-                    <input type="number" class="form-control" id="discount_or_commission">
+                    <input type="number" class="form-control number" id="discount_or_commission" min="0">
                   </div>
                   <div class="form-group">
                     <label for="">Net</label>
-                    <input type="number" class="form-control" id="net">
+                    <input type="number" class="form-control" id="net" disabled>
                   </div>
                 </div>
               </div>
@@ -104,6 +104,14 @@
         current_transaction_date = datenow;
         $('#transaction_date').val(datenow);
     }
+
+	function CalculateNet() {
+		$('#net').val("")
+		var totalamount = $('#amount').val();
+		var discount = $('#discount_or_commission').val();
+		var net = parseFloat(totalamount) - parseFloat(discount)
+		$('#net').val(net)
+	}
 
 
     function getItems() {
@@ -255,6 +263,10 @@
       $('#amount').val(total_amount);
 
     })
+
+	$(document).on('change','#discount_or_commission',function(){
+		CalculateNet();
+	})
 
 
 
