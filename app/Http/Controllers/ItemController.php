@@ -58,16 +58,28 @@ class ItemController extends Controller
                                 ->where('item_description',$request->item_description)
                                 ->first();
 
-            if ($is_unique_item == null && $request->item_name != null) {
-                if ($request->item_id > 0)
-                    HelperModel::UpdateModel("items","item_id",$request->item_id,$request);
-                else
-                    HelperModel::Create("items",$request);
-            }else{
+            if ($request->item_id > 0)
+            {
+                HelperModel::UpdateModel("items","item_id",$request->item_id,$request);
                 return response()->json([
-                    'code'=>404,
-                    'message'=>($request->item_name == null ? "Item name can not be null" : 'Item with the same name and description already exists'),
-                ],404);
+                    'code'=>200,
+                    'message'=>'updated successfully',
+                ],200);
+            }
+            else
+            {
+                //check if unique
+                if ($is_unique_item == null && $request->item_name != null)
+                {
+                    HelperModel::Create("items",$request);
+                }
+                else
+                {
+                    return response()->json([
+                        'code'=>404,
+                        'message'=>($request->item_name == null ? "Item name can not be null" : 'Item with the same name and description already exists'),
+                    ],404);
+                }
             }
         }
     }
