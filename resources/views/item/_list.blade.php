@@ -43,7 +43,7 @@
                 </td>
                 <td>
                     <button class="btn btn-xs btn-success btnedit" title="Edit Customer"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-xs btn-danger btndelete" title="Delete Customer"><i class="fas fa-trash"></i></button>
+                    {{-- <button class="btn btn-xs btn-danger btndelete" title="Delete Customer"><i class="fas fa-trash"></i></button> --}}
                     <button class="btn btn-xs btn-primary btnitemledger" title="Item Ledger"><i class="fas fa-list"></i></button>
                 </td>
             </tr>

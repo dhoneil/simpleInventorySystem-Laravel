@@ -39,8 +39,8 @@
               </div>
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label for="">Price</label>
-                  <input type="number" min="0" class="form-control" id="price">
+                  <label for="">Cost</label>
+                  <input type="number" min="0" class="form-control number" id="price">
                 </div>
                 <div class="form-group">
                   <label for="">&nbsp;</label>
@@ -255,12 +255,12 @@
     })
 
     $(document).on('click','.btnitemledger',function () {
-    	var thiss = $(this);
-    	var item_id = thiss.closest('tr').attr('id')
-    	current_item_id = item_id;
-		getInOutItems(current_item_id,1);
-		getInOutItems(current_item_id,2);
-		$('#itemledgermodal').modal('show')
+      var thiss = $(this);
+      var item_id = thiss.closest('tr').attr('id')
+      current_item_id = item_id;
+      getInOutItems(current_item_id,1);
+      getInOutItems(current_item_id,2);
+      $('#itemledgermodal').modal('show')
     })
 
 	function getInOutItems(item_id, transaction_type) {
