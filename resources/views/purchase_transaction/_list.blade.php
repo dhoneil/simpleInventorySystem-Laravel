@@ -5,6 +5,7 @@
             <th>Item</th>
             <th>Cost</th>
             <th>Qty</th>
+            <th>Delivery Fee</th>
             <th>Amount</th>
             <th>
                 <i class="fas fa-cog"></i>
@@ -18,11 +19,13 @@
                 <td>{{ $c->item_name.' - '.$c->item_description}}</td>
                 <td class="cost_value">{{$c->cost}}</td>
                 <td class="qty_value">{{ $c->qty }}</td>
+                <td class="delivery_fee_value">{{ $c->delivery_fee }}</td>
                 <td class="amount_value">
                     @php
                         $cost = $c->cost;
                         $qty = $c->qty;
-                        $amount = $cost * $qty;
+                        $delivery_fee = $c->delivery_fee;
+                        $amount = ($cost * $qty) + $delivery_fee;
                         echo $amount;
                     @endphp
                 </td>
@@ -39,6 +42,7 @@
             <td id="" style="font-weight: bold;"></td>
             <td id="cost_value_total" style="font-weight: bold;"></td>
             <td id="qty_value_total" style="font-weight: bold;"></td>
+            <td id="delivery_fee_value_total" style="font-weight: bold;"></td>
             <td id="amount_value_total" style="font-weight: bold;"></td>
             <td id="discount_or_commission_value_total"></td>
         </tr>
@@ -65,6 +69,14 @@
             var val = thiss.text();
             var trans_date = moment(val).format('MMMM DD, YYYY')
             thiss.text(trans_date);
+        });
+
+        var sumdeliveryfee = 0;
+        $('.delivery_fee_value').each(function() {
+            var thiss = $(this)
+            var qty = parseFloat(thiss.text());
+            var total = parseFloat(sumdeliveryfee += qty);
+            $('#delivery_fee_value_total').text(total).digits()
         });
 
         var sumcost = 0;

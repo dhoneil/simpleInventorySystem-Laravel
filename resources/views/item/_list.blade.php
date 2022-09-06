@@ -10,8 +10,8 @@
             <th>Code</th>
             <th>Name</th>
             <th>Description</th>
-            <th>Price</th>
-            <th>Qty</th>
+            {{-- <th>Price</th> --}}
+            <th>Total Remaining Count (Qty)</th>
             <th>
                 <i class="fas fa-cog"></i>
             </th>
@@ -24,7 +24,7 @@
                 <td>{{ $c->item_code_name }}</td>
                 <td>{{ $c->item_name }}</td>
                 <td>{{ $c->item_description }}</td>
-                <td>{{ $c->price }}</td>
+                {{-- <td>{{ $c->price }}</td> --}}
                 <td>
                     @php
                         $total_in = DB::table('purchase_transactions')

@@ -20,42 +20,38 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-10">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-group">
-                    <label for="">Transaction Date</label>
-                    <input type="date" class="form-control" id="transaction_date">
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <!-- <label for="">Item&nbsp;&nbsp;&nbsp;&nbsp;<span id="item_price_text">Price : <span id="item_price_value"></span></span></label> -->
-                        <label for="">Item</label>
-                        <select id="item_id" class="form-control select2"></select>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="">Cost</label>
-                        <input type="number" class="form-control number" id="price">
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="">Qty</label>
-                        <input type="number" class="form-control" id="qty">
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <label for="">&nbsp;</label>
-                <br>
-                <button class="btn btn-success btn-block" id="btnsave"><i class="fas fa-save"></i> Save</button>
-              </div>
-            </div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label for="">Transaction Date</label>
+					<input type="date" class="form-control" id="transaction_date">
+				</div>
+				<div class="form-group">
+					<!-- <label for="">Item&nbsp;&nbsp;&nbsp;&nbsp;<span id="item_price_text">Price : <span id="item_price_value"></span></span></label> -->
+					<label for="">Item</label>
+					<select id="item_id" class="form-control select2"></select>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label for="">Cost</label>
+					<input type="number" class="form-control number" id="price">
+				</div>
+				<div class="form-group">
+					<label for="">Qty</label>
+					<input type="number" class="form-control" id="qty">
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="form-group">
+					<label for="">Delivery Fee</label>
+					<input type="number" class="form-control number" id="delivery_fee">
+				</div>
+				<div class="form-group">
+					<label for="">&nbsp;</label>
+					<br>
+					<button class="btn btn-success btn-block" id="btnsave"><i class="fas fa-save"></i> Save</button>
+				</div>
+			</div>
           </div>
         </div>
       </div>
@@ -141,6 +137,7 @@
             'item_id':$('#item_id :selected').val(),
             'cost' : $('#price').val(),
             'qty':$('#qty').val(),
+            'delivery_fee':$('#delivery_fee').val(),
           },
           success:function(data){
             getAll()
@@ -159,6 +156,8 @@
         $('#item_id option[value=""]').prop('selected', true);
         $('.select2').select2()
         $('#qty').val('')
+        $('#price').val('')
+        $('#delivery_fee').val('')
       }
 
 	  function getSingle() {
@@ -166,8 +165,8 @@
             url:'{{ route("PurchaseTransactions_single") }}',
             method:'post',
             data:{
-            '_token':"{{ csrf_token() }}",
-            'purchase_transaction_id':current_purchase_transaction_id,
+				'_token':"{{ csrf_token() }}",
+				'purchase_transaction_id':current_purchase_transaction_id,
             },
             success:function(data){
                 populateForm(data)
@@ -186,6 +185,7 @@
         $('#price').val(data.purchase_transaction.cost)
         $('.select2').select2();
         $('#qty').val(data.purchase_transaction.qty)
+        $('#delivery_fee').val(data.purchase_transaction.delivery_fee)
 	  }
 
       $(document).on('click','#btnsave',function () {
@@ -194,10 +194,10 @@
       })
 
       $(document).on('click','.btnedit',function () {
-        var thiss = $(this);
-        var purchase_transaction_id = thiss.closest('tr').attr('id')
-        current_purchase_transaction_id = purchase_transaction_id;
-		    getSingle();
+			var thiss = $(this);
+			var purchase_transaction_id = thiss.closest('tr').attr('id')
+			current_purchase_transaction_id = purchase_transaction_id;
+			getSingle();
       })
 
 	  $(document).on('click','.btndelete',function () {
@@ -209,28 +209,28 @@
 		}
       })
 
-    $(document).on('change','#item_id',function (params) {
-      var item_id = $('#item_id :selected').val();
-      if (item_id != "") {
-        $.ajax({
-          url:'{{ route("items_single") }}',
-            method:'post',
-            data:{
-            '_token':"{{ csrf_token() }}",
-            'item_id':item_id,
-            },
-            success:function(data){
-              if (data) {
-                $('#item_price_text').show();
-                $('#item_price_value').text(data.item.price);
-                $('#price').val(data.item.price)
-              }
-            }
-        })
-      }else{
-        $('#item_price_text').hide();
-      }
-    })
+    // $(document).on('change','#item_id',function (params) {
+    //   var item_id = $('#item_id :selected').val();
+    //   if (item_id != "") {
+    //     $.ajax({
+    //       url:'{{ route("items_single") }}',
+    //         method:'post',
+    //         data:{
+    //         '_token':"{{ csrf_token() }}",
+    //         'item_id':item_id,
+    //         },
+    //         success:function(data){
+    //           if (data) {
+    //             $('#item_price_text').show();
+    //             $('#item_price_value').text(data.item.price);
+    //             $('#price').val(data.item.price)
+    //           }
+    //         }
+    //     })
+    //   }else{
+    //     $('#item_price_text').hide();
+    //   }
+    // })
 
     $(document).on('change','#qty',function (params) {
       var qty = $(this).val();
