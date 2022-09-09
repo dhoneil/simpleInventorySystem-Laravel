@@ -1,10 +1,10 @@
-FOR NEWLY CLONED PROJECTS
-composer install
-cp .env.example .env
-php artisan key:generate
-CONFIGURE ENV FILE (db credentials)
-php artisan migrate:refresh --seed
-php artisan serve
+- FOR NEWLY CLONED PROJECTS
+- composer install
+- cp .env.example .env
+- php artisan key:generate
+- CONFIGURE ENV FILE (db credentials)
+- php artisan migrate:refresh --seed
+- php artisan serve
 
 
 
