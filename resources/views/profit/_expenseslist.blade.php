@@ -1,4 +1,4 @@
-<table class="table table-sm table-bordered table-striped" id="purchasetransactiontable">
+<table class="table table-sm table-bordered table-striped table-hover" id="purchasetransactiontable">
     <thead style="background-color:#343a40; color:white;">
         <tr>
             <th>Date</th>
