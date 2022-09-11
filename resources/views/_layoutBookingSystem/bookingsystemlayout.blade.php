@@ -37,6 +37,7 @@
 
   <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css?v=3.2.0') }}">
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/sweetalert2/sweetalert2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css') }}">
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -146,6 +147,7 @@
 <script src="{{ asset('AdminLTE/dist/js/demo.js') }}"></script>
 <script src="{{ asset('AdminLTE/plugins/moment/moment.min.js') }}"></script>
 <script src="{{ asset('AdminLTE/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.js') }}"></script>
 
 
 
