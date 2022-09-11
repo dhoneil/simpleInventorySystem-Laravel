@@ -8,7 +8,7 @@
 		<div class="col-sm-3">
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">Sale Date Range</h3>
+					<h3 class="card-title">Date Range</h3>
 				</div>
 				<div class="card-body">
 					<div class="form-group">
