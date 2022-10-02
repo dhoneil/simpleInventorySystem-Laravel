@@ -56,8 +56,8 @@
 							<dd class="col-sm-8" id="net_value_total_final">0.00</dd>
 							<dt class="col-sm-4">Expenses</dt>
 							<dd class="col-sm-8" id="amount_value_sales_total_final">0.00</dd> --}}
-							<dt class="col-sm-4">Total Earnings</dt>
-							<dd class="col-sm-8" id="total_final_earnings">0.00</dd>
+							<dt class="col-sm-8">Total Earnings</dt>
+							<dd class="col-sm-4" id="total_final_earnings">0.00</dd>
 							</dl>
 						</div>
 					</div>
