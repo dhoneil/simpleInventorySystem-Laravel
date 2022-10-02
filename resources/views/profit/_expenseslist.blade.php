@@ -34,7 +34,7 @@
                 <td id="cost_value_total" style="font-weight: bold;"></td>
                 <td id="qty_value_total" style="font-weight: bold;"></td>
                 <td id="delivery_fee_value_total" style="font-weight: bold;"></td>
-                <td id="amount_value_sales_total" style="font-weight: bold; color:green;"></td>
+                <td id="amount_value_sales_total" style="font-weight: bold;"></td>
             </tr>
     </tbody>
 </table>

@@ -36,7 +36,7 @@
             <td id="qty_sales_value_total" style="font-weight: bold;"></td>
             <td id="amount_value_total" style="font-weight: bold;"></td>
             <td id="discount_or_commission_value_total" style="font-weight: bold;"></td>
-            <td id="net_value_total" style="font-weight: bold; color:green;"></td>
+            <td id="net_value_total" style="font-weight: bold;"></td>
         </tr>
     </tbody>
 </table>

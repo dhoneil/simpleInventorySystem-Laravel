@@ -52,10 +52,10 @@
 						</div>
 						<div class="card-body">
 							<dl class="row">
-							<dt class="col-sm-4">Revenue</dt>
+							{{-- <dt class="col-sm-4">Revenue</dt>
 							<dd class="col-sm-8" id="net_value_total_final">0.00</dd>
 							<dt class="col-sm-4">Expenses</dt>
-							<dd class="col-sm-8" id="amount_value_sales_total_final">0.00</dd>
+							<dd class="col-sm-8" id="amount_value_sales_total_final">0.00</dd> --}}
 							<dt class="col-sm-4">Total Earnings</dt>
 							<dd class="col-sm-8" id="total_final_earnings">0.00</dd>
 							</dl>
@@ -109,7 +109,10 @@
 			var totalExpenses = $('#amount_value_sales_total').text();
 			$('#amount_value_sales_total_final').text(totalExpenses);
 
-			var total_final_earnings = parseFloat(totalearnings.replace(/,/g, '')) - parseFloat(totalExpenses.replace(/,/g, ''))
+			// var total_final_earnings = parseFloat(totalearnings.replace(/,/g, '')) - parseFloat(totalExpenses.replace(/,/g, ''))
+			var revenues_amount = $('#amount_value_total').text();
+			var cost_value_total = $('#cost_value_total').text();
+			var total_final_earnings = parseFloat(revenues_amount.replace(/,/g, '')) - parseFloat(cost_value_total.replace(/,/g, ''))
 			$('#total_final_earnings').text(total_final_earnings)
 		}
 
