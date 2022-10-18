@@ -24,20 +24,20 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-9">
-			<div class="card">
+		<div class="col-sm-9" hidden>
+		    <div class="card">
 				<div class="card-header">
-					<h3 class="card-title">Revenues</h3>
+					<h3 class="card-title">Expenses</h3>
 				</div>
-				<div class="card-body" id="profitlistarea">
+				<div class="card-body" id="expenseslistarea">
 
 				</div>
 			</div>
 			<div class="card">
 				<div class="card-header">
-					<h3 class="card-title">Expenses</h3>
+					<h3 class="card-title">Revenues</h3>
 				</div>
-				<div class="card-body" id="expenseslistarea">
+				<div class="card-body" id="profitlistarea">
 
 				</div>
 			</div>
@@ -64,6 +64,14 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="col-sm-9" >
+            <div class="card">
+                <div class="card-body" id="itemsContainer">
+
+                </div>
+            </div>
+		</div>
 	</div>
 
 <script>
@@ -71,9 +79,27 @@
 		//Date range picker
     	$('#saledaterange').daterangepicker()
 
+    	var datefrom =  $('#saledaterange').data('daterangepicker').startDate.format('YYYY-MM-DD');
+		var dateto =  $('#saledaterange').data('daterangepicker').endDate.format('YYYY-MM-DD');
+
+    	function getItemsList() {
+            $.ajax({
+                url:"{{ route('GetItems') }}",
+                method:'post',
+                data:{
+					_token : "{{ csrf_token() }}",
+					datefrom : datefrom,
+					dateto:dateto
+				},
+                success:function(res){
+                    $('#itemsContainer').html(res);
+                }
+            })
+        }
+
+        getItemsList()
+
 		function filterList() {
-			var datefrom =  $('#saledaterange').data('daterangepicker').startDate.format('YYYY-MM-DD');
-			var dateto =  $('#saledaterange').data('daterangepicker').endDate.format('YYYY-MM-DD');
 
 			$.ajax({
 				url:"{{ route('GetAllProfit') }}",
@@ -117,7 +143,8 @@
 		}
 
 		$(document).on('change','#saledaterange',function () {
-			filterList();
+			// filterList();
+			getItemsList()
 
 			setTimeout(function() { ComputeTotals(); }, 2000);
 

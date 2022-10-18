@@ -17,6 +17,19 @@ class ProfitController extends Controller
         return view('profit.index');
     }
 
+    public function GetItems(Request $request)
+    {
+        $from = $request->datefrom;
+        $to = $request->dateto;
+        $items_list = DB::table('items')
+                        ->join('item_codes','items.item_code_id','=','item_codes.item_code_id')
+                        ->join('item_genres','items.item_genre_id','=','item_genres.item_genre_id')
+                        // ->whereBetween('sale_transactions.transaction_date', [$from, $to])
+                        ->select('items.*', 'item_codes.item_code_name', 'item_genres.item_genre_name')
+                        ->get();
+        return view('profit._items')->with('items',$items_list);
+    }
+
     public function GetAllProfit(Request $request)
     {
         $from = $request->datefrom;

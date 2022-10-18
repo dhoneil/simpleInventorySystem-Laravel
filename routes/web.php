@@ -135,8 +135,10 @@ Route::post('/admin/PurchaseTransactions_create',[PurchaseTransactionController:
 
 //PROFIT
 Route::get('/admin/Profit',[ProfitController::class,'index'])->name('Profit');
+Route::post('/admin/GetItems',[ProfitController::class,'GetItems'])->name('GetItems');
 Route::post('/admin/GetAllProfit',[ProfitController::class,'GetAllProfit'])->name('GetAllProfit');
 Route::post('/admin/GetAllExpenses',[ProfitController::class,'GetAllExpenses'])->name('GetAllExpenses');
+
 
 //USERS
 Route::get('/admin/Users',[UserInformationController::class,'index'])->name('Users');
